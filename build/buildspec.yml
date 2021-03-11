@@ -9,8 +9,8 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - aws --version && docker --version && docker ps
-      - $(aws ecr get-login --region $AWS_REGION --no-include-email)
-      - REPOSITORY_URI=486652066693.dkr.ecr.$AWS_REGION.amazonaws.com/demo-flask-signup
+      - aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 509411574368.dkr.ecr.ap-northeast-2.amazonaws.com
+      - REPOSITORY_URI=509411574368.dkr.ecr.ap-northeast-2.amazonaws.com/demo-flask-signup
       - IMAGE_TAG=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
   build:
     commands:

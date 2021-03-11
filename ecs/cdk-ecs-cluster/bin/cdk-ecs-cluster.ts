@@ -4,5 +4,5 @@ import { CdkEcsClusterStack } from '../lib/cdk-ecs-cluster-stack';
 
 const app = new cdk.App();
 new CdkEcsClusterStack(app, 'CdkEcsClusterStack', {
-    env: {region: "us-west-2"}
+    env: {region: "ap-northeast-2"}
 });

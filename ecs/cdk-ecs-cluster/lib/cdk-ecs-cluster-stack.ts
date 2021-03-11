@@ -31,7 +31,7 @@ export class CdkEcsClusterStack extends cdk.Stack {
       assumedBy: new ServicePrincipal('ecs-tasks.amazonaws.com')
     });
     taskRole.addToPolicy(new PolicyStatement({
-      resources: ['arn:aws:dynamodb:us-west-2:486652066693:table/new_startup_signups'],
+      resources: [`arn:aws:dynamodb:${cdk.Stack.of(this).region}:${cdk.Stack.of(this).account}:table/new_startup_signups`],
       actions: ['dynamodb:PutItem'] 
     }));
 
