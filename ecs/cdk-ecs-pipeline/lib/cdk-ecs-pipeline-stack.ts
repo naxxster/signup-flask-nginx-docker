@@ -15,12 +15,13 @@ const github = {
 // TODO : get serviceName and clusterName from output of the ECSStack
 
 const ecs = {
-  serviceName: 'CdkEcsClusterStack-ECSDemoFlaskClusterService64792F81-139FZUMNQ8F4Z',
-  clusterName: 'CdkEcsClusterStack-ECSDemoFlaskClusterEA6F5D7D-HSE4OU91QC5D'
+  serviceName: 'CdkEcsClusterStack-ECSDemoFlaskClusterService64792F81-18wDTVRcBgt3',
+  clusterName: 'CdkEcsClusterStack-ECSDemoFlaskClusterEA6F5D7D-0Q4f1XCy4nTA'
 }
 
 
 import cdk = require('@aws-cdk/core');
+import codecommit = require('@aws-cdk/aws-codecommit');
 import pipeline = require('@aws-cdk/aws-codepipeline');
 import pipeline_actions = require('@aws-cdk/aws-codepipeline-actions');
 import codebuild = require('@aws-cdk/aws-codebuild');
@@ -37,11 +38,9 @@ export class CdkEcsPipelineStack extends cdk.Stack {
 
     // create the source action (github)
     const sourceOutput = new pipeline.Artifact();
-    const sourceAction = new pipeline_actions.GitHubSourceAction({
-      actionName: "GitHubTrigger",
-      owner: github.owner,
-      repo: github.repo,
-      oauthToken: cdk.SecretValue.secretsManager(github.secret_manager_secret_name),
+    const sourceAction = new pipeline_actions.CodeCommitSourceAction({
+      actionName: "CodeCommitTrigger",
+      repository: codecommit.Repository.fromRepositoryName(this, 'ECSFlaskSignupCodeCommitRepository', 'signup-flask-nginx-docker'),
       output: sourceOutput,
       branch: 'master'
     });

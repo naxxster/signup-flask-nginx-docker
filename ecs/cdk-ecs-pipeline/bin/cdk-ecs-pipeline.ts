@@ -5,5 +5,5 @@ import { CdkEcsPipelineStack } from '../lib/cdk-ecs-pipeline-stack';
 
 const app = new cdk.App();
 new CdkEcsPipelineStack(app, 'CdkEcsPipelineStack', {
-    env: {region: "us-west-2"}
+    env: {region: "ap-northeast-2"}
 });
